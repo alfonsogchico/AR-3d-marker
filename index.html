@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html style="overflow:hidden">
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no,user-scalable=no,maximum-scale=1">
+  <title>Markers in AR.js test</title>
+  <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
+  <script src="https://rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
+  <!-- <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script> -->
+  <!-- <script src="https://hammerjs.github.io/dist/hammer.js"></script> -->
+
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css"> -->
+  <!-- <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script> -->
+  <script src="https://unpkg.com/aframe-look-at-component@0.8.x/dist/aframe-look-at-component.min.js"></script>
+</head>
+
+<body style='margin : 0px; overflow: hidden;'>
+<!--   <script>
+    AFRAME.registerComponent('3d-model-control', {
+      init: function () {
+        var sceneEl = this.el;
+        const scene = document.getElementById('scene')
+        //scene.addEventListener('touchmove', event => {movingTouch(event)})
+        
+        const model = document.getElementById('model')
+
+        const rotBut = document.getElementById('rotation-btn')
+        var rotation = new Hammer(rotBut);
+        rotation.on('panmove', function(ev) {
+          const curr = model.getAttribute('rotation');
+          model.setAttribute('rotation', {
+            'x': curr.x,
+            'y': curr.y + ev.deltaX*0.02,
+            'z': curr.z
+            });
+        });
+        
+        const zoomBut = document.getElementById('zoom-btn')
+        var zoom = new Hammer(zoomBut);
+        zoom.on('panmove', function(ev) {
+          const curr = model.getAttribute('scale');
+          var newscale = curr.x + ev.deltaX*0.00001;
+          if (newscale<0) { newscale = 0};
+            model.setAttribute('scale', {
+              'x': newscale,
+              'y': newscale,
+              'z': newscale
+              });
+          
+        });
+
+        const plaBut = document.getElementById('play-btn')
+        var animate = new Hammer(plaBut);
+        animate.on('tap', function(ev) {
+          model.setAttribute("animation-mixer","clip: poser;"); 
+          var endAnimation = function () {sceneEl.removeEventListener('animation-loop',endAnimation); model.setAttribute("animation-mixer","clip: idle;");};
+          setTimeout (function(){sceneEl.addEventListener('animation-loop',endAnimation);},500);
+        });
+      }
+    });
+  </script> -->
+  <a-scene embedded arjs='trackingMethod: best; debugUIEnabled: false;' vr-mode-ui="enabled: false" 3d-model-control>
+    
+    <a-assets>
+      <!-- <a-asset-item id="3d-obj" src="resources/models/ghost/scene.gltf"></a-asset-item> -->
+    </a-assets>
+
+
+    <a-marker preset="hiro">
+
+      <a-entity position="4 0 0.25">
+          <a-circle rotation="-90 0 0" color="red" radius="0.1" opacity="0.6"></a-circle>
+          <a-entity line="start: 0 0 0; end: 0 1 -0.66; color: red"></a-entity>
+          <a-plane color="#f9ed69" height="0.7" width="1.8" rotation="-70 0 0" position="0 1 -1" opacity="0.6">      
+              <a-text value="Código QR\n\nSirve para abrir la web asociada" color="#b83b5e" position="0 0 0.25" align="center" font="OpenSans-Regular-msdf.json" negate="false" width="6" wrap-count="100"></a-text>
+          </a-plane>
+      </a-entity>
+
+      <a-entity position="0 0 0">
+          <a-circle rotation="-90 0 0" color="red" radius="0.1" opacity="0.6"></a-circle>
+          <a-entity line="start: 0 0 0; end: 0 1 -0.66; color: red"></a-entity>
+          <a-plane color="#f9ed69" height="0.7" width="1.8" rotation="-70 0 0" position="0 1 -1" opacity="0.6">      
+              <a-text value="Marcador AR\n\nSirve para situar\nlos objetos virtuales" color="#b83b5e" position="0 0.05 0.25" align="center" font="OpenSans-Regular-msdf.json" negate="false" width="6" wrap-count="100"></a-text>
+          </a-plane>
+      </a-entity>
+
+      <a-entity position="1 0 -1">
+          <a-circle rotation="-90 0 0" color="red" radius="0.1" opacity="0.6"></a-circle>
+          <a-entity line="start: 0 0 0; end: 0 1 -0.66; color: red"></a-entity>
+          <a-plane color="#f9ed69" height="0.7" width="1.8" rotation="-70 0 0" position="0 1 -1" opacity="0.6">      
+              <a-text value="Las coordenadas son\nrelativas al marcador AR\n(estas son 1,-1)" color="#b83b5e" position="0 0 0.25" align="center" font="OpenSans-Regular-msdf.json" negate="false" width="6" wrap-count="100"></a-text>
+          </a-plane>
+      </a-entity>
+
+      <a-entity position="2 0 -2">
+          <a-circle rotation="-90 0 0" color="red" radius="0.1" opacity="0.6"></a-circle>
+          <a-entity line="start: 0 0 0; end: 0 1 -0.66; color: red"></a-entity>
+          <a-plane color="#f9ed69" height="0.7" width="1.8" rotation="-70 0 0" position="0 1 -1" opacity="0.6">      
+              <a-text value="El tamaño del marcador\ndetermina la escala\n(este mide 4cm, y la escala es 4:1)" color="#b83b5e" position="0 0 0.25" align="center" font="OpenSans-Regular-msdf.json" negate="false" width="6" wrap-count="100"></a-text>
+          </a-plane>
+      </a-entity>
+
+      <a-entity position="3 0 -5">
+          <a-circle rotation="-90 0 0" color="red" radius="0.1" opacity="0.6"></a-circle>
+          <a-entity line="start: 0 0 0; end: 0 1 -0.66; color: red"></a-entity>
+          <a-plane color="#f9ed69" height="0.7" width="1.8" rotation="-70 0 0" position="0 1 -1" opacity="0.6">      
+              <a-text value="Podemos ubicar un marcador\nen cualquier parte de la página\nEstas son las coordenadas 3, -5" color="#b83b5e" position="0 0 0.25" align="center" font="OpenSans-Regular-msdf.json" negate="false" width="6" wrap-count="100"></a-text>
+          </a-plane>
+      </a-entity>
+
+      <a-entity position="-0.75 0 -8">
+          <a-circle rotation="-90 0 0" color="red" radius="0.1" opacity="0.6"></a-circle>
+          <a-entity line="start: 0 0 0; end: 0 1 -0.66; color: red"></a-entity>
+          <a-plane color="#f9ed69" height="0.7" width="1.8" rotation="-70 0 0" position="0 1 -1" opacity="0.6">      
+              <a-text value="estas son las coordenadas:\n-0.75 0 -8" color="#b83b5e" position="0 0 0.25" align="center" font="OpenSans-Regular-msdf.json" negate="false" width="6" wrap-count="100"></a-text>
+          </a-plane>
+      </a-entity>
+
+      <!-- <a-plane look-at="[camera]" color="#CCC" height="1" width="2" rotation="-90 0 0" position="1.1 0 -1-8" opacity="0.8">      
+        <a-text value="Welcome!" color="#ff0000" position="0 0 0.1" scale="1.5 1.5 1.5" align: center;></a-text>
+      </a-plane> -->
+
+    </a-marker>
+    <a-entity camera></a-entity>
+
+  </a-scene>
+  
+
+  <!-- <div class="columns" style='position: fixed; bottom: 10%; text-align: center; width: 100%; z-index: 1;'>
+    
+    <div class="column"></div>
+    
+    <div class="column">
+      
+      <div class="buttons is-pulled-right">
+        <button class="button" id="rotation-btn">
+              <span class="icon">
+                  <i class="fas fa-sync-alt"></i>
+                </span>
+                <span>arrastrar para rotar</span>
+        </button>
+        <button class="button" id="zoom-btn">
+          <span class="icon">
+            <i class="fas fa-search-plus"></i>
+          </span>
+          <span>arrastrar para zoom</span></button>
+        <button class="button" id="play-btn">
+            <span class="icon">
+                <i class="fas fa-play"></i>
+              </span>
+              <span>saludar</span>
+        </button>
+      </div>
+    </div>
+  
+  </div> -->
+  
+
+</body>
+</html>
+
